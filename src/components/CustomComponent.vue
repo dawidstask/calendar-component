@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
-const timeUnit = ref()
+const selectedTimeUnit = ref()
+const timeUnits = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute']
 </script>
 
 <template>
   <div>
-    <div>Selected: {{ timeUnit }}</div>
-    <select v-model="timeUnit">
+    <div>Selected: {{ selectedTimeUnit }}</div>
+    <select v-model="selectedTimeUnit">
       <option disabled value="">Please select one</option>
-      <option>year</option>
-      <option>quarter</option>
-      <option>month</option>
+      <option
+        v-for="time in timeUnits"
+        :key="time"
+        :value="time"
+      >
+        {{ time }}
+      </option>
     </select>
   </div>
 </template>
