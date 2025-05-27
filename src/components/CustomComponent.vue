@@ -3,6 +3,9 @@ import {computed, ref, watch} from "vue";
 
 defineProps({
   selectOptions: Array<string>,
+  disabledOptions: Array<string>,
+  min: Number,
+  max: Number,
   minDate: String,
   maxDate: String
 })
@@ -44,6 +47,7 @@ watch(
         v-for="item in selectOptions"
         :key="item"
         :value="item"
+        :disabled="disabledOptions?.includes(item)"
       >
         {{ item }}
       </option>
@@ -53,7 +57,10 @@ watch(
       <input
         type="number"
         v-model="inputValue"
+        :min="min"
+        :max="max"
         placeholder="Enter value"
+        style="min-width: 100px"
       />
       {{ selectedTimeUnit }}(s)
     </div>

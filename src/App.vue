@@ -19,6 +19,9 @@ const onUpdate = (val) => {
     <h1>Calendar component</h1>
     <CustomComponent
       :selectOptions="selectOptions"
+      :disabledOptions="['year', 'week']"
+      :min="1"
+      :max="5"
       :minDate="minDate"
       :maxDate="maxDate"
       @update="onUpdate"
