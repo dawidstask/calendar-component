@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {computed, ref} from "vue";
+
+defineProps({
+  selectOptions: Array,
+})
 
 const selectedTimeUnit = ref()
 const timeUnits = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute']
+const isTimeUnit = computed(() => timeUnits.includes(selectedTimeUnit.value))
 </script>
 
 <template>
   <div>
+    {{isTimeUnit}}
     <div>Selected: {{ selectedTimeUnit }}</div>
     <select v-model="selectedTimeUnit">
       <option disabled value="">Please select one</option>
@@ -17,6 +23,7 @@ const timeUnits = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute']
       >
         {{ time }}
       </option>
+      <option value="t">ttt</option>
     </select>
   </div>
 </template>
