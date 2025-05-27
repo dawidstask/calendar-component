@@ -1,18 +1,21 @@
-# ./
+# 📅 Customisable Calendar Component (Vue 3)
 
-This template should help get you started developing with Vue 3 in Vite.
+This project provides a **customisable and reusable Vue.js calendar component** that allows users to pick a **date range** or define a **time unit + value** combination (e.g. "2 weeks", "3 months").
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Features
 
-## Type Support for `.vue` Imports in TS
+- Fully configurable input:
+    - `select` for time units (year, quarter, month, week, day, hour, minute)
+    - numeric `input` for unit values
+    - `date pickers` for ranges: from-to, from-only, to-only
+- Input constraints:
+    - Disable unwanted select options
+    - Min/max values and date limits
+- Clean JSON output structure
+- Simple integration with your app
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
