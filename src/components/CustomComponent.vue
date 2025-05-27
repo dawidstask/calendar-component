@@ -6,14 +6,14 @@ defineProps({
 })
 
 const selectedTimeUnit = ref()
+const inputValue = ref()
+
 const timeUnits = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute']
 const isTimeUnit = computed(() => timeUnits.includes(selectedTimeUnit.value))
 </script>
 
 <template>
   <div>
-    {{isTimeUnit}}
-    <div>Selected: {{ selectedTimeUnit }}</div>
     <select v-model="selectedTimeUnit">
       <option disabled value="">Please select one</option>
       <option
@@ -23,8 +23,16 @@ const isTimeUnit = computed(() => timeUnits.includes(selectedTimeUnit.value))
       >
         {{ time }}
       </option>
-      <option value="t">ttt</option>
     </select>
+
+    <div v-if="isTimeUnit">
+      <input
+        type="number"
+        v-model="inputValue"
+        placeholder="Enter value"
+      />
+      {{ selectedTimeUnit }}(s)
+    </div>
   </div>
 </template>
 
