@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import {computed, ref, watch} from "vue";
 
 defineProps({
-  selectOptions: Array,
+  selectOptions: Array<string>,
+  minDate: String,
+  maxDate: String
 })
+const emit = defineEmits(['update'])
 
 const selectedTimeUnit = ref()
 const inputValue = ref()
+const dateFrom = ref()
+const dateTo = ref()
 
 const timeUnits = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute']
 const datesFrom = ['date from-to', 'date-from']
@@ -15,6 +20,20 @@ const datesTo = ['date from-to', 'date-to']
 const isTimeUnit = computed(() => timeUnits.includes(selectedTimeUnit.value))
 const isDateFrom = computed(() => datesFrom.includes(selectedTimeUnit.value))
 const isDateTo = computed(() => datesTo.includes(selectedTimeUnit.value))
+
+watch(
+  [selectedTimeUnit, inputValue, dateFrom, dateTo],
+  () =>
+  {
+    const output = {
+      timeUnit: selectedTimeUnit.value,
+      value: isTimeUnit.value ? parseInt(inputValue.value) || null : null,
+      from: isDateFrom.value ? dateFrom.value : null,
+      to: isDateTo.value ? dateTo.value : null
+    }
+    emit('update', output)
+  }
+)
 </script>
 
 <template>
@@ -39,8 +58,25 @@ const isDateTo = computed(() => datesTo.includes(selectedTimeUnit.value))
       {{ selectedTimeUnit }}(s)
     </div>
 
+    <div v-if="isDateFrom">
+      <label>Date from:</label>
+      <input
+        type="date"
+        v-model="dateFrom"
+        :min="minDate"
+        :max="maxDate"
+      />
+    </div>
 
-    DF: {{isDateFrom}} - DT: {{isDateTo}}
+    <div v-if="isDateTo">
+      <label>Date to:</label>
+      <input
+        type="date"
+        v-model="dateTo"
+        :min="minDate"
+        :max="maxDate"
+      />
+    </div>
   </div>
 </template>
 
